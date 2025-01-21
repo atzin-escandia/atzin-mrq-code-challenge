@@ -200,3 +200,4 @@ sometimes the price chart won't behave as expected)_
 
 If you have any questions, please send email to **[hiring.tech@mrq.com](mailto:hiring.tech@mrq.com?subject=[THA-Q]Frontend%20Challenge%20Question)**
 .
+# atzin-mrq-code-challenge
