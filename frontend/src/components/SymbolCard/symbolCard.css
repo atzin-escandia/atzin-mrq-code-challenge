@@ -1,6 +1,7 @@
 .symbolCard {
   background-color: var(--colorWhite);
   border-radius: 5px;
+  cursor: pointer;
 }
 
 .symbolCard__header {

@@ -1,0 +1,16 @@
+.symbolPriceFormatter {
+  display: flex;
+  justify-content: space-between;
+  align-items: end;
+}
+
+.symbolPriceFormatter__title {
+  font-size: 12px;
+  font-weight: 500;
+  text-transform: uppercase;
+}
+
+.symbolPriceFormatter__price {
+  font-size: 22px;
+  font-weight: 800;
+}
