@@ -7,30 +7,47 @@ import './SymbolCard.css';
 import SymbolPriceFormatter from '../SymbolPriceFormatter';
 import { priceFormatter } from '@/lib';
 import SymbolCardHeader from '../SymbolCardHeader';
+import { usePriceVariation } from '@/hooks/usePriceVariation';
 
 type SymbolCardProps = {
   id: string;
+  symbolId: string | null;
   onClick: (symbolId: string) => void;
   price: number;
 };
 
-const SymbolCard = ({ id, onClick, price }: SymbolCardProps) => {
-  const { trend, companyName, industry, marketCap } = useAppSelector((state) => state.stocks.entities[id]);
+const SymbolCard = ({ id, onClick, price, symbolId }: SymbolCardProps) => {
+  const { trend, companyName, industry, marketCap } = useAppSelector(
+    (state) => state.stocks.entities[id]
+  );
   const marketCapFormatted = priceFormatter.format(marketCap);
+  const isSelected = symbolId === id;
+  const isUnselected = symbolId && symbolId !== id;
+  const { hasBigVariation } = usePriceVariation(price);
 
   const handleOnClick = () => {
     onClick(id);
   };
 
   return (
-    <div onClick={handleOnClick} className="symbolCard">
+    <div
+      onClick={handleOnClick}
+      className={`symbolCard 
+        ${isSelected ? 'symbolCard_selected' : ''} 
+        ${isUnselected ? 'symbolCard_unselected' : ''}
+        ${hasBigVariation ? 'symbolCard__shake' : ''}
+        `}
+    >
       <SymbolCardHeader trend={trend} id={id} />
       <div className="symbolCard__content">
         <SymbolPriceFormatter price={price} />
         <ListItem Icon={<CompanyIcon />} label={companyName} spacing="space-between" />
         <ListItem Icon={<IndustryIcon />} label={industry} spacing="space-between" />
-        <ListItem Icon={<MarketCapIcon />} label={`$${marketCapFormatted}`}
-          spacing="space-between" />
+        <ListItem
+          Icon={<MarketCapIcon />}
+          label={`$${marketCapFormatted}`}
+          spacing="space-between"
+        />
       </div>
     </div>
   );

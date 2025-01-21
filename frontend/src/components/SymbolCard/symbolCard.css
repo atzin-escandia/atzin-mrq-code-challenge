@@ -2,10 +2,21 @@
   background-color: var(--colorWhite);
   border-radius: 5px;
   cursor: pointer;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.symbolCard_selected {
+  transform: scale(1.05);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.9);
+  z-index: 2;
+}
+
+.symbolCard_unselected {
+  transform: scale(0.95);
 }
 
 .symbolCard__content {
-  padding: 5px;
+  padding: 10px;
 }
 
 .symbolCard__shake {
