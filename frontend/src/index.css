@@ -16,6 +16,8 @@
   --colorTertiary: #e4e6e6;
   --colorDark: #0e1120;
   --colorWhite: #fdfdfd;
+  --colorRed: #f97e7e;
+  --colorGreen: #a6ff90;
 
   color: var(--colorDark);
 
