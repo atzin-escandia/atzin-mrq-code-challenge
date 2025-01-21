@@ -13,10 +13,13 @@
 
   --colorPrimary: #f9dc3e;
   --colorSecondary: #f2f3f3;
+  --colorTertiary: #e4e6e6;
   --colorDark: #0e1120;
   --colorWhite: #fdfdfd;
 
   color: var(--colorDark);
+
+  --padding-large: 15px;
 }
 
 a {
