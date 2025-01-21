@@ -6,6 +6,7 @@ import ListItem from '@/components/ListItem';
 import './SymbolCard.css';
 import SymbolPriceFormatter from '../SymbolPriceFormatter';
 import { priceFormatter } from '@/lib';
+import SymbolCardHeader from '../SymbolCardHeader';
 
 type SymbolCardProps = {
   id: string;
@@ -23,9 +24,7 @@ const SymbolCard = ({ id, onClick, price }: SymbolCardProps) => {
 
   return (
     <div onClick={handleOnClick} className="symbolCard">
-      <div className="symbolCard__header">
-        {id} - {trend}
-      </div>
+      <SymbolCardHeader trend={trend} id={id} />
       <div className="symbolCard__content">
         <SymbolPriceFormatter price={price} />
         <ListItem Icon={<CompanyIcon />} label={companyName} spacing="space-between" />

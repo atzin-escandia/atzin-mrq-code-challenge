@@ -1,0 +1,21 @@
+.symbolCardHeader {
+  background-color: var(--colorDark);
+  border-radius: 5px 5px 0 0;
+  padding: 0 5px;
+  color: var(--colorWhite);
+  display: flex;
+  font-weight: 600;
+  position: relative;
+}
+
+.symbolCardHeader__id {
+  font-weight: 600;
+  font-size: 24px;
+}
+
+.symbolCardHeader__icon {
+  width: 50px;
+  position: absolute;
+  top: -15px;
+  right: -10px;
+}

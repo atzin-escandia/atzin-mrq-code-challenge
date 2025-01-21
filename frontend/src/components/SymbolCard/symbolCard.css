@@ -4,15 +4,6 @@
   cursor: pointer;
 }
 
-.symbolCard__header {
-  background-color: var(--colorDark);
-  border-radius: 5px 5px 0 0;
-  padding: 0 5px;
-  color: var(--colorWhite);
-  display: flex;
-  font-weight: 600;
-}
-
 .symbolCard__content {
   padding: 5px;
 }
