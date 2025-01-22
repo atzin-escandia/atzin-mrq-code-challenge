@@ -1,6 +1,7 @@
 import up from '@/assets/up.png';
 import down from '@/assets/down.png';
 import './SymbolCardHeader.css';
+import { memo } from 'react';
 
 interface SymbolCardHeaderProps {
   id: string | null;
@@ -19,4 +20,4 @@ const SymbolCardHeader = ({ id, trend }: SymbolCardHeaderProps) => {
   );
 };
 
-export default SymbolCardHeader;
+export default memo(SymbolCardHeader);

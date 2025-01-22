@@ -1,4 +1,4 @@
-import { useEffect } from 'react';
+import { memo, useEffect } from 'react';
 import { useAppDispatch, useAppSelector } from '@/hooks/redux';
 import SymbolCard from '../SymbolCard';
 import { fetchAllStocks, selectors } from '@/store/stocksSlice';
@@ -14,11 +14,11 @@ const SymbolsGrid = () => {
 
   return (
     <div className="symbolsGrid__container">
-      {stockSymbols.map((id, i) => (
-        <SymbolCard key={i} id={id} />
+      {stockSymbols.map((id) => (
+        <SymbolCard key={id} id={id} />
       ))}
     </div>
   );
 };
 
-export default SymbolsGrid;
+export default memo(SymbolsGrid);

@@ -9,16 +9,15 @@ import { selectActiveSymbol } from '@/store/dashboardOptionsSlice';
 const PriceChart = () => {
   const dispatch = useAppDispatch();
   const symbolId = useAppSelector(selectActiveSymbol);
+  const apiState = useAppSelector(selectors.apiState);
+  const data = useAppSelector(selectors.selectPriceHistory);
+  const symbolInfo = useAppSelector(selectors.selectSymbolInfo);
 
   useEffect(() => {
     if (symbolId) {
       dispatch(fetchPriceHistory(symbolId));
     }
   }, [dispatch, symbolId]);
-
-  const apiState = useAppSelector(selectors.apiState);
-  const data = useAppSelector(selectors.selectPriceHistory);
-  const symbolInfo = useAppSelector(selectors.selectSymbolInfo);
 
   if (apiState.loading && symbolId !== null)
     return (

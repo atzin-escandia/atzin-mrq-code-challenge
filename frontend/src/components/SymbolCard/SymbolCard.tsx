@@ -6,6 +6,7 @@ import SymbolCardHeader from '../SymbolCardHeader';
 import { usePriceVariation } from '@/hooks/usePriceVariation';
 import { useGlowClass } from '@/hooks/useGlowEffect';
 import SymbolCardInfo from '../SymbolCardInfo/SymbolCardInfo';
+import { memo } from 'react';
 import {
   selectActiveSymbol,
   selectShowCardInfo,
@@ -20,14 +21,12 @@ const SymbolCard = ({ id }: SymbolCardProps) => {
   const dispatch = useAppDispatch();
   const showCardInfo = useAppSelector(selectShowCardInfo);
   const activeSymbol = useAppSelector(selectActiveSymbol);
-  const prices = useAppSelector((state) => state.prices);
-
+  const price = useAppSelector((state) => state.prices[id]);
   const { trend, companyName, industry, marketCap } = useAppSelector(
     (state) => state.stocks.entities[id]
   );
 
   const marketCapFormatted = priceFormatter.format(marketCap);
-  const price = prices[id];
   const isSelected = activeSymbol === id;
   const isUnselected = activeSymbol && activeSymbol !== id;
   const { hasBigVariation } = usePriceVariation(price);
@@ -37,14 +36,15 @@ const SymbolCard = ({ id }: SymbolCardProps) => {
     dispatch(updateActiveSymbol({ activeSymbol: id }));
   };
 
-  const classesSymbolCard = `
-        ${glowClass}
-        ${isSelected ? 'symbolCard_selected' : ''} 
-        ${isUnselected ? 'symbolCard_unselected' : ''}
-        ${hasBigVariation ? 'symbolCard__shake' : ''}`;
+  const classesSymbolCard = `symbolCard
+  ${glowClass}
+  ${isSelected ? 'symbolCard__selected' : ''} 
+  ${isUnselected ? 'symbolCard__unselected' : ''}
+  ${hasBigVariation ? 'symbolCard__shake' : ''}
+`;
 
   return (
-    <div onClick={handleSelectSymbol} className={`symbolCard ${classesSymbolCard}`}>
+    <div onClick={handleSelectSymbol} className={classesSymbolCard}>
       <SymbolCardHeader trend={trend} id={id} />
       <div className="symbolCard__content">
         <SymbolPriceFormatter price={price} />
@@ -59,4 +59,5 @@ const SymbolCard = ({ id }: SymbolCardProps) => {
     </div>
   );
 };
-export default SymbolCard;
+
+export default memo(SymbolCard);

@@ -2,6 +2,7 @@ import { ReactComponent as CompanyIcon } from '@/assets/company.svg';
 import { ReactComponent as MarketCapIcon } from '@/assets/market_cap.svg';
 import { ReactComponent as IndustryIcon } from '@/assets/industry.svg';
 import ListItem from '@/components/ListItem';
+import { memo } from 'react';
 
 type SymbolCardProps = {
   companyName: string;
@@ -10,7 +11,6 @@ type SymbolCardProps = {
 };
 
 const SymbolCardInfo = ({ companyName, industry, marketCapFormatted }: SymbolCardProps) => {
-
   return (
     <>
       <ListItem Icon={<CompanyIcon />} label={companyName} spacing="space-between" />
@@ -23,4 +23,4 @@ const SymbolCardInfo = ({ companyName, industry, marketCapFormatted }: SymbolCar
     </>
   );
 };
-export default SymbolCardInfo;
+export default memo(SymbolCardInfo);
