@@ -1,5 +1,4 @@
-
-import { useAppSelector } from '@/hooks/redux';
+import { useAppDispatch, useAppSelector } from '@/hooks/redux';
 import './SymbolCard.css';
 import SymbolPriceFormatter from '../SymbolPriceFormatter';
 import { priceFormatter } from '@/lib';
@@ -7,27 +6,35 @@ import SymbolCardHeader from '../SymbolCardHeader';
 import { usePriceVariation } from '@/hooks/usePriceVariation';
 import { useGlowClass } from '@/hooks/useGlowEffect';
 import SymbolCardInfo from '../SymbolCardInfo/SymbolCardInfo';
+import {
+  selectActiveSymbol,
+  selectShowCardInfo,
+  updateActiveSymbol
+} from '@/store/dashboardOptionsSlice';
 
 type SymbolCardProps = {
   id: string;
-  symbolId: string | null;
-  onClick: (symbolId: string) => void;
-  price: number;
-  showCardInfo: boolean;
 };
 
-const SymbolCard = ({ id, onClick, price, symbolId, showCardInfo }: SymbolCardProps) => {
+const SymbolCard = ({ id }: SymbolCardProps) => {
+  const dispatch = useAppDispatch();
+  const showCardInfo = useAppSelector(selectShowCardInfo);
+  const activeSymbol = useAppSelector(selectActiveSymbol);
+  const prices = useAppSelector((state) => state.prices);
+
   const { trend, companyName, industry, marketCap } = useAppSelector(
     (state) => state.stocks.entities[id]
   );
+
   const marketCapFormatted = priceFormatter.format(marketCap);
-  const isSelected = symbolId === id;
-  const isUnselected = symbolId && symbolId !== id;
+  const price = prices[id];
+  const isSelected = activeSymbol === id;
+  const isUnselected = activeSymbol && activeSymbol !== id;
   const { hasBigVariation } = usePriceVariation(price);
   const glowClass = useGlowClass(price);
 
-  const handleOnClick = () => {
-    onClick(id);
+  const handleSelectSymbol = () => {
+    dispatch(updateActiveSymbol({ activeSymbol: id }));
   };
 
   const classesSymbolCard = `
@@ -37,16 +44,17 @@ const SymbolCard = ({ id, onClick, price, symbolId, showCardInfo }: SymbolCardPr
         ${hasBigVariation ? 'symbolCard__shake' : ''}`;
 
   return (
-    <div onClick={handleOnClick} className={`symbolCard ${classesSymbolCard}`}>
+    <div onClick={handleSelectSymbol} className={`symbolCard ${classesSymbolCard}`}>
       <SymbolCardHeader trend={trend} id={id} />
       <div className="symbolCard__content">
         <SymbolPriceFormatter price={price} />
-        {showCardInfo &&
+        {showCardInfo && (
           <SymbolCardInfo
             companyName={companyName}
             marketCapFormatted={marketCapFormatted}
             industry={industry}
-          />}
+          />
+        )}
       </div>
     </div>
   );
