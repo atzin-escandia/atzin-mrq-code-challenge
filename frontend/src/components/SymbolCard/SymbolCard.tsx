@@ -6,6 +6,7 @@ import SymbolCardHeader from '../SymbolCardHeader';
 import { usePriceVariation } from '@/hooks/usePriceVariation';
 import { useGlowClass } from '@/hooks/useGlowEffect';
 import SymbolCardInfo from '../SymbolCardInfo/SymbolCardInfo';
+import { useShakeEffect } from '@/hooks/useShakeEffect';
 import { memo } from 'react';
 import {
   selectActiveSymbol,
@@ -31,6 +32,7 @@ const SymbolCard = ({ id }: SymbolCardProps) => {
   const isUnselected = activeSymbol && activeSymbol !== id;
   const { hasBigVariation } = usePriceVariation(price);
   const glowClass = useGlowClass(price);
+  const shake = useShakeEffect(hasBigVariation);
 
   const handleSelectSymbol = () => {
     dispatch(updateActiveSymbol({ activeSymbol: id }));
@@ -40,7 +42,7 @@ const SymbolCard = ({ id }: SymbolCardProps) => {
   ${glowClass}
   ${isSelected ? 'symbolCard__selected' : ''} 
   ${isUnselected ? 'symbolCard__unselected' : ''}
-  ${hasBigVariation ? 'symbolCard__shake' : ''}
+  ${shake ? 'symbolCard__shake' : ''}
 `;
 
   return (

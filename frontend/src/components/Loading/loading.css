@@ -6,6 +6,10 @@
   flex-grow: 1;
 }
 
+.loading__full__h {
+  height: calc(100vh - 60px);
+}
+
 .loading__pulse {
   margin: auto;
   position: relative;
