@@ -4,21 +4,20 @@ import { Line, LineChart, XAxis, YAxis, ResponsiveContainer } from 'recharts';
 import { useAppDispatch, useAppSelector } from '@/hooks/redux';
 import { fetchPriceHistory, selectors } from '@/store/priceHistorySlice';
 import Loading from '@/components/Loading';
-type PriceChartProps = {
-  symbolId: string | null;
-};
+import { selectActiveSymbol } from '@/store/dashboardOptionsSlice';
 
-const PriceChart = ({ symbolId }: PriceChartProps) => {
+const PriceChart = () => {
   const dispatch = useAppDispatch();
+  const symbolId = useAppSelector(selectActiveSymbol);
+  const apiState = useAppSelector(selectors.apiState);
+  const data = useAppSelector(selectors.selectPriceHistory);
+  const symbolInfo = useAppSelector(selectors.selectSymbolInfo);
+
   useEffect(() => {
     if (symbolId) {
       dispatch(fetchPriceHistory(symbolId));
     }
   }, [dispatch, symbolId]);
-
-  const apiState = useAppSelector(selectors.apiState);
-  const data = useAppSelector(selectors.selectPriceHistory);
-  const symbolInfo = useAppSelector(selectors.selectSymbolInfo);
 
   if (apiState.loading && symbolId !== null)
     return (

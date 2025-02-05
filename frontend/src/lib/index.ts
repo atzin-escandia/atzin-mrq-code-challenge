@@ -1,2 +1,1 @@
-// import { x } from './x';
-// export { x };
+export const priceFormatter = Intl.NumberFormat('en', { notation: 'compact' });

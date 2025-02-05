@@ -13,10 +13,15 @@
 
   --colorPrimary: #f9dc3e;
   --colorSecondary: #f2f3f3;
+  --colorTertiary: #e4e6e6;
   --colorDark: #0e1120;
   --colorWhite: #fdfdfd;
+  --colorRed: #f97e7e;
+  --colorGreen: #a6ff90;
 
   color: var(--colorDark);
+
+  --padding-large: 15px;
 }
 
 a {
